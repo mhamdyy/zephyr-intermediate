@@ -36,12 +36,13 @@ void t_high_fn(void *p1, void *p2, void *p3)
     }
 }
 
-K_THREAD_DEFINE(t_low_fn,  STACK_SIZE, t_low_fn,  NULL, NULL, NULL, PRIO_LOW,  0, 0);
-K_THREAD_DEFINE(t_med_fn,  STACK_SIZE, t_med_fn,  NULL, NULL, NULL, PRIO_MED,  0, 0);
-K_THREAD_DEFINE(t_high_fn, STACK_SIZE, t_high_fn, NULL, NULL, NULL, PRIO_HIGH, 0, 0);
+K_THREAD_DEFINE(thread_low_fn,  STACK_SIZE, t_low_fn,  NULL, NULL, NULL, PRIO_LOW,  0, 0);
+K_THREAD_DEFINE(thread_med_fn,  STACK_SIZE, t_med_fn,  NULL, NULL, NULL, PRIO_MED,  0, 0);
+K_THREAD_DEFINE(thread_high_fn, STACK_SIZE, t_high_fn, NULL, NULL, NULL, PRIO_HIGH, 0, 0);
 
 int main(void)
 {
+    LOG_INF("Main Function Started tick=%u", k_uptime_get_32());
     return 0;
 }
 
