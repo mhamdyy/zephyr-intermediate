@@ -47,7 +47,7 @@ void t_coop_fn(void *p1, void *p2, void *p3)
     }
     LOG_INF("T_COOP yield now tick=%u", k_uptime_get_32());
 
-    K_yield();
+    k_yield();
     LOG_INF("T_COOP Done tick=%u", k_uptime_get_32());
 }
 
