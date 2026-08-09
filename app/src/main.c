@@ -10,30 +10,37 @@ LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 #define PRIO_HIGH (3)
 #define PRIO_COOP (-1)
 
+K_TIMER_DEFINE(t_low_timer,  NULL, NULL);
+K_TIMER_DEFINE(t_med_timer,  NULL, NULL);
+K_TIMER_DEFINE(t_high_timer, NULL, NULL);
+
 void t_low_fn(void *p1, void *p2, void *p3)
 {
+    k_timer_start(&t_low_timer, K_MSEC(300), K_MSEC(300));
     while (1)
     {
+	k_timer_status_sync(&t_low_timer);
         LOG_INF("T_LOW running tick=%u", k_uptime_get_32());
-        k_msleep(300);
     }
 }
 
 void t_med_fn(void *p1, void *p2, void *p3)
 {
+    k_timer_start(&t_med_timer, K_MSEC(200), K_MSEC(200));
     while (1)
     {
+	k_timer_status_sync(&t_med_timer);
         LOG_INF("T_MED running tick=%u", k_uptime_get_32());
-        k_msleep(200);
     }
 }
 
 void t_high_fn(void *p1, void *p2, void *p3)
 {
+    k_timer_start(&t_high_timer, K_MSEC(100), K_MSEC(100));
     while (1)
     {
+	k_timer_status_sync(&t_high_timer);
         LOG_INF("T_HIGH running tick=%u", k_uptime_get_32());
-        k_msleep(100);
     }
 }
 
