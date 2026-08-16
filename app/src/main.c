@@ -10,6 +10,8 @@ LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 static struct k_sem sem_finished;
 static volatile int counter = 0;
 
+static K_MUTEX_DEFINE(mutex_for_shared_data);
+
 void t_fn(void *p1, void *p2, void *p3)
 {
     const char *name = k_thread_name_get(k_current_get());
@@ -17,7 +19,9 @@ void t_fn(void *p1, void *p2, void *p3)
 
     for (int i = 0; i < INCREMENTS; i++)
     {
+        k_mutex_lock(&mutex_for_shared_data, K_FOREVER);
         counter ++;
+        k_mutex_unlock(&mutex_for_shared_data);
     }
 
     LOG_INF("%s Finished", name);
@@ -39,7 +43,7 @@ int main(void)
     k_sem_take(&sem_finished, K_FOREVER);
     k_sem_take(&sem_finished, K_FOREVER);
 
-    LOG_INF("Actual  final value: %u", counter);
+    LOG_INF("Actual final value: %u", counter);
 
     if (counter == INCREMENTS * 2)
     {
