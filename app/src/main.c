@@ -4,61 +4,51 @@
 LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 
 #define STACK_SIZE (1024)
+#define PRIO (7)
+#define INCREMENTS (1000000)
 
-#define PRIO_LOW  (7)
-#define PRIO_MED  (5)
-#define PRIO_HIGH (3)
-#define PRIO_COOP (-1)
+static struct k_sem sem_finished;
+static volatile int counter = 0;
 
-void t_low_fn(void *p1, void *p2, void *p3)
+void t_fn(void *p1, void *p2, void *p3)
 {
-    while (1)
+    const char *name = k_thread_name_get(k_current_get());
+    LOG_INF("%s Started", name);
+
+    for (int i = 0; i < INCREMENTS; i++)
     {
-        LOG_INF("T_LOW running tick=%u", k_uptime_get_32());
-        k_msleep(300);
+        counter ++;
     }
+
+    LOG_INF("%s Finished", name);
+    k_sem_give(&sem_finished);
 }
 
-void t_med_fn(void *p1, void *p2, void *p3)
-{
-    while (1)
-    {
-        LOG_INF("T_MED running tick=%u", k_uptime_get_32());
-        k_msleep(200);
-    }
-}
 
-void t_high_fn(void *p1, void *p2, void *p3)
-{
-    while (1)
-    {
-        LOG_INF("T_HIGH running tick=%u", k_uptime_get_32());
-        k_msleep(100);
-    }
-}
+K_THREAD_DEFINE(thread_a,  STACK_SIZE, t_fn,  NULL, NULL, NULL, PRIO,  0, 0);
+K_THREAD_DEFINE(thread_b,  STACK_SIZE, t_fn,  NULL, NULL, NULL, PRIO,  0, 0);
 
-void t_coop_fn(void *p1, void *p2, void *p3)
-{
-    LOG_INF("T_COOP Started tick=%u", k_uptime_get_32());
-    for (int i = 0; i < 5; i++)
-    {
-        LOG_INF("T_COOP running step %d/5 tick=%u", i+1, k_uptime_get_32());
-        k_busy_wait(40000);
-    }
-    LOG_INF("T_COOP yield now tick=%u", k_uptime_get_32());
-
-    k_yield();
-    LOG_INF("T_COOP Done tick=%u", k_uptime_get_32());
-}
-
-K_THREAD_DEFINE(thread_low_fn,  STACK_SIZE, t_low_fn,  NULL, NULL, NULL, PRIO_LOW,  0, 0);
-K_THREAD_DEFINE(thread_med_fn,  STACK_SIZE, t_med_fn,  NULL, NULL, NULL, PRIO_MED,  0, 0);
-K_THREAD_DEFINE(thread_high_fn, STACK_SIZE, t_high_fn, NULL, NULL, NULL, PRIO_HIGH, 0, 0);
-K_THREAD_DEFINE(thread_coop_fn, STACK_SIZE, t_coop_fn, NULL, NULL, NULL, PRIO_COOP, 0, 0);
 
 int main(void)
 {
-    LOG_INF("Main Function Started tick=%u", k_uptime_get_32());
+    LOG_INF("Main Function Started");
+    k_sem_init(&sem_finished, 0, 1);
+
+    LOG_INF("Expected final value: %d", INCREMENTS * 2);
+
+    k_sem_take(&sem_finished, K_FOREVER);
+    k_sem_take(&sem_finished, K_FOREVER);
+
+    LOG_INF("Actual  final value: %u", counter);
+
+    if (counter == INCREMENTS * 2)
+    {
+        LOG_WRN("No race this run");
+    }
+    else
+    {
+        LOG_ERR("Race condition confirmed: lost %d updates", (INCREMENTS * 2) - counter);
+    }
     return 0;
 }
 
