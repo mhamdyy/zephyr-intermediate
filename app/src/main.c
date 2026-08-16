@@ -19,9 +19,9 @@ void worker_fn(void *p1, void *p2, void *p3)
     const char *name = k_thread_name_get(k_current_get());
 
     for (int i = 0; i < INCREMENTS; i++) {
-        // k_mutex_lock(&counter_mutex, K_FOREVER);
+        k_mutex_lock(&counter_mutex, K_FOREVER);
         counter++;
-        // k_mutex_unlock(&counter_mutex);
+        k_mutex_unlock(&counter_mutex);
     }
 
     LOG_INF("[%s] finished", name);
