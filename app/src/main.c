@@ -65,6 +65,37 @@ static int total_events;
 static int total_wakeups;
 static int total_processed;
 
+K_WORK_DEFINE(work, work_handler);
+
+static void work_handler(struct k_work *work)
+{
+    ARG_UNUSED(work);
+    while (total_processed < EVENT_COUNT)
+    {
+        total_wakeups++;
+
+        total_processed++;
+
+        /*
+         * This is the "real work". In Task 2 this goes into
+         * the k_work handler body.
+         */
+        LOG_INF("[CONSUMER] processed event %d  wakeups_so_far=%d  tick=%u",
+                total_processed, total_wakeups,
+                k_uptime_get_32());
+    }
+
+    /* Summary after all events processed */
+    LOG_INF("\n");
+    LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  wasted=%d",
+            total_processed,
+            total_wakeups,
+            total_wakeups - total_processed);
+    LOG_INF("[SUMMARY] wasted wakeups = %d%% of all wakeups",
+            (total_wakeups - total_processed) * 100 /
+            total_wakeups);
+
+}
 /* ------------------------------------------------------------------ */
 /*  sensor_sim - fires EVENT_COUNT events, 100ms apart               */
 /* ------------------------------------------------------------------ */
@@ -86,7 +117,12 @@ static void sensor_sim_fn(void *p1, void *p2, void *p3)
          *
          * Remove sensor_flag entirely once you do that.
          */
-        sensor_flag = true;
+        //sensor_flag = true;
+        int ret = k_work_submit(&work);
+        if (ret < 0)
+        {
+            LOG_ERR("[sensor_sim] submit failed: %d", ret);
+        }
 
         /*
          * BONUS: Replace the single k_msleep(SENSOR_MS) above with
@@ -105,7 +141,7 @@ static void sensor_sim_fn(void *p1, void *p2, void *p3)
 /*  handler. The handler body is the same as what's inside the        */
 /*  if (sensor_flag) block below.                                      */
 /* ------------------------------------------------------------------ */
-
+#if 0
 static void polling_fn(void *p1, void *p2, void *p3)
 {
     ARG_UNUSED(p1); ARG_UNUSED(p2); ARG_UNUSED(p3);
@@ -139,6 +175,8 @@ static void polling_fn(void *p1, void *p2, void *p3)
             total_wakeups);
 }
 
+#endif
+
 /* ------------------------------------------------------------------ */
 /*  Threads                                                             */
 /*                                                                     */
@@ -147,7 +185,7 @@ static void polling_fn(void *p1, void *p2, void *p3)
 /* ------------------------------------------------------------------ */
 
 K_THREAD_DEFINE(sensor_thread,  STACK_SIZE, sensor_sim_fn, NULL, NULL, NULL, 5, 0, 0);
-K_THREAD_DEFINE(polling_thread, STACK_SIZE, polling_fn,    NULL, NULL, NULL, 5, 0, 0);
+//K_THREAD_DEFINE(polling_thread, STACK_SIZE, polling_fn,    NULL, NULL, NULL, 5, 0, 0);
 
 /* ================================================================
  * TASK 2 PLACEHOLDER - implement your solution here
