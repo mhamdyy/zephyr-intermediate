@@ -68,23 +68,20 @@ static int total_processed;
 static void work_handler(struct k_work *work)
 {
     ARG_UNUSED(work);
-    while (total_processed < EVENT_COUNT)
-    {
-        total_wakeups++;
 
-        total_processed++;
+    total_wakeups++;
+    total_processed++;
 
-        /*
-         * This is the "real work". In Task 2 this goes into
-         * the k_work handler body.
-         */
-        LOG_INF("[CONSUMER] processed event %d  wakeups_so_far=%d  tick=%u",
-                total_processed, total_wakeups,
-                k_uptime_get_32());
-    }
+    /*
+     * This is the "real work". In Task 2 this goes into
+     * the k_work handler body.
+     */
+
+    LOG_INF("[CONSUMER] processed event %d  wakeups_so_far=%d  tick=%u",
+            total_processed, total_wakeups,
+            k_uptime_get_32());
 
     /* Summary after all events processed */
-    LOG_INF("\n");
     LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  wasted=%d",
             total_processed,
             total_wakeups,
