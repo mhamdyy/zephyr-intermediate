@@ -81,15 +81,6 @@ static void work_handler(struct k_work *work)
             total_processed, total_wakeups,
             k_uptime_get_32());
 
-    /* Summary after all events processed */
-    LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  wasted=%d",
-            total_processed,
-            total_wakeups,
-            total_wakeups - total_processed);
-    LOG_INF("[SUMMARY] wasted wakeups = %d%% of all wakeups",
-            (total_wakeups - total_processed) * 100 /
-            total_wakeups);
-
 }
 
 K_WORK_DEFINE(work, work_handler);
@@ -130,6 +121,14 @@ static void sensor_sim_fn(void *p1, void *p2, void *p3)
     }
 
     LOG_INF("[SENSOR] all events produced");
+        /* Summary after all events processed */
+    LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  wasted=%d",
+            total_processed,
+            total_wakeups,
+            total_wakeups - total_processed);
+    LOG_INF("[SUMMARY] wasted wakeups = %d%% of all wakeups",
+            (total_wakeups - total_processed) * 100 /
+            total_wakeups);
 }
 
 /* ------------------------------------------------------------------ */
