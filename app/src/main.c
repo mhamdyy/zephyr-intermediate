@@ -49,7 +49,7 @@ LOG_MODULE_REGISTER(homework, LOG_LEVEL_DBG);
 
 #define STACK_SIZE    1024
 #define SENSOR_MS     20    /* sensor fires every 100ms */
-#define POLL_MS       10     /* polling consumer checks every 10ms */
+#define POLL_MS       10    /* polling consumer checks every 10ms */
 #define EVENT_COUNT   5     /* total sensor events to produce */
 
 /* ================================================================
@@ -153,12 +153,12 @@ static void polling_fn(void *p1, void *p2, void *p3)
 
     /* Summary after all events processed */
     LOG_INF("\n");
-    LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  wasted=%d",
-            total_processed,
+    LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  events_wasted=%d",
+            total_events,
             total_wakeups,
-            total_wakeups - total_processed);
+            total_wakeups - total_events);
     LOG_INF("[SUMMARY] wasted wakeups = %d%% of all wakeups",
-            (total_wakeups - total_processed) * 100 /
+            (total_wakeups - total_events) * 100 /
             total_wakeups);
 }
 
