@@ -65,8 +65,6 @@ static int total_events;
 static int total_wakeups;
 static int total_processed;
 
-K_WORK_DEFINE(work, work_handler);
-
 static void work_handler(struct k_work *work)
 {
     ARG_UNUSED(work);
@@ -96,6 +94,9 @@ static void work_handler(struct k_work *work)
             total_wakeups);
 
 }
+
+K_WORK_DEFINE(work, work_handler);
+
 /* ------------------------------------------------------------------ */
 /*  sensor_sim - fires EVENT_COUNT events, 100ms apart               */
 /* ------------------------------------------------------------------ */
