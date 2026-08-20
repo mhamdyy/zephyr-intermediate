@@ -83,7 +83,7 @@ static void work_handler(struct k_work *work)
 
 }
 
-K_WORK_DEFINE(work, work_handler);
+K_WORK_DELAYABLE_DEFINE(work, work_handler);
 
 /* ------------------------------------------------------------------ */
 /*  sensor_sim - fires EVENT_COUNT events, 100ms apart               */
