@@ -50,8 +50,7 @@ LOG_MODULE_REGISTER(homework, LOG_LEVEL_DBG);
 #define STACK_SIZE    1024
 #define SENSOR_MS     20    /* sensor fires every 100ms */
 #define POLL_MS       10     /* polling consumer checks every 10ms */
-#define EVENT_COUNT   10     /* total sensor events to produce */
-#define BURST_EVENT_COUNT 5
+#define EVENT_COUNT   5     /* total sensor events to produce */
 
 /* ================================================================
  * STARTER CODE -- inefficient polling version
@@ -93,13 +92,9 @@ K_WORK_DEFINE(work, work_handler);
 static void sensor_sim_fn(void *p1, void *p2, void *p3)
 {
     for (int i = 0; i < EVENT_COUNT; i++) {
-        k_msleep(SENSOR_MS);
 
-        for (int j = 0; j < BURST_EVENT_COUNT ; j++)
-        {
-            total_events++;
-            LOG_INF("[SENSOR] event %d  tick=%u", i, k_uptime_get_32());
-            i++;
+        total_events++;
+        LOG_INF("[SENSOR] event %d  tick=%u", i, k_uptime_get_32());
 
         /*
          * STARTER: set a flag for the polling thread.
@@ -110,12 +105,11 @@ static void sensor_sim_fn(void *p1, void *p2, void *p3)
          *
          * Remove sensor_flag entirely once you do that.
          */
-            //sensor_flag = true;
-            int ret = k_work_reschedule(&work, K_MSEC(30));
-            if (ret < 0)
-            {
-                LOG_ERR("[sensor_sim] submit failed: %d", ret);
-            }
+        //sensor_flag = true;
+        int ret = k_work_reschedule(&work, K_MSEC(30));
+        if (ret < 0)
+        {
+            LOG_ERR("[sensor_sim] submit failed: %d", ret);
         }
         /*
          * BONUS: Replace the single k_msleep(SENSOR_MS) above with
@@ -125,14 +119,6 @@ static void sensor_sim_fn(void *p1, void *p2, void *p3)
     }
 
     LOG_INF("[SENSOR] all events produced");
-        /* Summary after all events processed */
-    LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  wasted=%d",
-            total_processed,
-            total_wakeups,
-            total_wakeups - total_processed);
-    LOG_INF("[SUMMARY] wasted wakeups = %d%% of all wakeups",
-            (total_wakeups - total_processed) * 100 /
-            total_wakeups);
 }
 
 /* ------------------------------------------------------------------ */
@@ -220,6 +206,15 @@ int main(void)
 
     /* Wait long enough for all events to complete */
     k_msleep((EVENT_COUNT + 2) * SENSOR_MS + 500);
+
+    /* Summary after all events processed */
+    LOG_INF("[SUMMARY] events=%d  total_wakeups=%d  wasted=%d",
+            total_processed,
+            total_wakeups,
+            total_wakeups - total_processed);
+    LOG_INF("[SUMMARY] wasted wakeups = %d%% of all wakeups",
+            (total_wakeups - total_processed) * 100 /
+            total_wakeups);
 
     return 0;
 }
