@@ -4,7 +4,7 @@
 
 LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 
-#define STACK_SIZE (1024)
+#define STACK_SIZE (2048)
 #define PRIO (7)
 
 typedef struct _sensor_data {
@@ -17,10 +17,10 @@ void display_listener_cb(const struct zbus_channel *chan);
 
 ZBUS_LISTENER_DEFINE(fast_display_listner, display_listener_cb);
 
-ZBUS_MSG_SUBSCRIBER_DEFINE(slow_logger_subscriber);
+ZBUS_MSG_SUBSCRIBER_DEFINE(logger_sub);
 
-ZBUS_CHAN_DEFINE(sensor_channel, sensor_data, NULL, NULL,
-                 ZBUS_OBSERVERS(fast_display_listner, slow_logger_subscriber),
+ZBUS_CHAN_DEFINE(sensor_channel, struct _sensor_data, NULL, NULL,
+                 ZBUS_OBSERVERS(fast_display_listner, logger_sub),
                  ZBUS_MSG_INIT(.temperature_mc = 0,
                                .timestamp_ms = 0,
                                .seq = 0));
@@ -76,7 +76,7 @@ void logger_thread_fn(void *p1, void *p2, void *p3)
     {
         sensor_data msg;
 
-        int ret = zbus_sub_wait_msg(&slow_logger_subscriber, &sensor_channel, &msg, K_MSEC(1500));
+        int ret = zbus_sub_wait_msg(&logger_sub, &chan, &msg, K_MSEC(1500));
 
         if (ret != 0)
         {
