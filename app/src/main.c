@@ -41,8 +41,8 @@ void sensor_thread_fn(void *p1, void *p2, void *p3)
 
     k_thread_name_set(k_current_get(), "sensor");
 
-    ensor_data data;
-
+    sensor_data data;
+    int i =0;
     while(1)
     {
         data.temperature_mc = 24000 + (i * 350);
@@ -59,7 +59,7 @@ void sensor_thread_fn(void *p1, void *p2, void *p3)
         {
             LOG_WRN("[SENSOR] publish failed ret=%d", ret);
         }
-
+	i++;
         k_msleep(100);
     }
 }
