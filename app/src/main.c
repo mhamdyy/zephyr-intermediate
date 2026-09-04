@@ -53,7 +53,7 @@ void sensor_thread_fn(void *p1, void *p2, void *p3)
                 data.seq,
                 data.temperature_mc);
 
-        int ret = zbus_chan_pub(&sensor_chan, &data, K_MSEC(100));
+        int ret = zbus_chan_pub(&sensor_channel, &data, K_MSEC(100));
 
         if (ret != 0)
         {
@@ -76,7 +76,7 @@ void logger_thread_fn(void *p1, void *p2, void *p3)
     {
         sensor_data msg;
 
-        int ret = zbus_sub_wait_msg(&logger_sub, &chan, &msg, K_MSEC(1500));
+        int ret = zbus_sub_wait_msg(&slow_logger_subscriber, &sensor_channel, &msg, K_MSEC(1500));
 
         if (ret != 0)
         {
