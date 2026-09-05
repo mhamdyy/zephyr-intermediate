@@ -59,7 +59,7 @@ void sensor_thread_fn(void *p1, void *p2, void *p3)
         {
             LOG_WRN("[SENSOR] publish failed ret=%d", ret);
         }
-	i++;
+        i++;
         k_msleep(100);
     }
 }
