@@ -18,6 +18,9 @@ typedef struct _sensor_data {
 
 K_MSGQ_DEFINE(pipeline_queue, sizeof(sensor_data), PIPELINE_QUEUE_DEPTH, 4);
 
+bool sensor_thread_finished = false;
+bool logger_thread_finished = false;
+
 void sensor_wgt_miss()
 {
     LOG_ERR("Sensor thread watchdog expired");
@@ -57,6 +60,8 @@ void sensor_thread_fn(void *p1, void *p2, void *p3)
     }
 
     task_wdt_delete(wdt_sensor);
+
+    sensor_thread_finished = true;
 }
 
 void logger_thread_fn(void *p1, void *p2, void *p3)
@@ -89,6 +94,36 @@ void logger_thread_fn(void *p1, void *p2, void *p3)
         task_wdt_feed(wdt_logger);
     }
     task_wdt_delete(wdt_logger);
+
+    logger_thread_finished = true;
+}
+
+static void health_thread_fn(void *p1, void *p2, void *p3)
+{
+    ARG_UNUSED(p1); ARG_UNUSED(p2); ARG_UNUSED(p3);
+
+    while (1)
+    {
+        k_msleep(50);
+
+        uint32_t used = k_msgq_num_used_get(&pipeline_queue);
+
+        LOG_INF("[HEALTH] pipeline_queue=%u/%u", used, PIPELINE_QUEUE_DEPTH);
+
+        LOG_DBG("[HEALTH] queue has %u free slots", PIPELINE_QUEUE_DEPTH - used);
+
+        if (used > 0.75 * PIPELINE_QUEUE_DEPTH) 
+        {
+            LOG_WRN("[HEALTH] pipeline_queue is more than 75%% full");
+        }
+
+        if ((true == sensor_thread_finished ) && (true == logger_thread_finished))
+        {
+            break;
+        }
+    }
+
+    LOG_INF("[HEALTH] done");
 }
 
 K_THREAD_DEFINE(sensor_thread, STACK_SIZE, sensor_thread_fn, NULL, NULL, NULL, PRIO, 0, 0);
