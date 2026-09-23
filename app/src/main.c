@@ -7,7 +7,7 @@ LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 
 #define STACK_SIZE              (2048)
 #define PRIO                    (7)
-#define PIPELINE_QUEUE_DEPTH    (6)
+#define PIPELINE_QUEUE_DEPTH    (20)
 #define SENSOR_DATA_COUNT       (20)
 
 typedef struct _sensor_data {
@@ -70,7 +70,7 @@ void logger_thread_fn(void *p1, void *p2, void *p3)
 
     k_thread_name_set(k_current_get(), "logger");
 
-    int wdt_logger = task_wdt_add(2000, logger_wgt_miss, (void*) k_current_get());
+    int wdt_logger = task_wdt_add(200, logger_wgt_miss, (void*) k_current_get());
 
     for (int i = 0; i < SENSOR_DATA_COUNT; i++)
     {
@@ -90,7 +90,7 @@ void logger_thread_fn(void *p1, void *p2, void *p3)
                 msg.temperature_mc,
                 k_uptime_get_32() - msg.timestamp_ms);
 
-        k_msleep(350);
+        k_msleep(1000);
         task_wdt_feed(wdt_logger);
     }
     task_wdt_delete(wdt_logger);
@@ -112,7 +112,7 @@ static void health_thread_fn(void *p1, void *p2, void *p3)
 
         LOG_DBG("[HEALTH] queue has %u free slots", PIPELINE_QUEUE_DEPTH - used);
 
-        if (used > 0.75 * PIPELINE_QUEUE_DEPTH) 
+        if (used > 0.75 * PIPELINE_QUEUE_DEPTH)
         {
             LOG_WRN("[HEALTH] pipeline_queue is more than 75%% full");
         }
