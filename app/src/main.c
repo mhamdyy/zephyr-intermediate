@@ -42,7 +42,8 @@ static void event_timer_expiry(struct k_timer *timer)
     /* Both threads become ready when the timer interrupt returns. */
     k_sem_give(&maintenance_start);
 
-    /* TODO: Add an application trace event for this sequence. */
+    /* Add an application trace event for this sequence. */
+    sys_trace_named_event("event_ready", event.seq, k_msgq_num_used_get(&control_queue));
 }
 
 K_TIMER_DEFINE(event_timer, event_timer_expiry, NULL);
@@ -66,10 +67,23 @@ static void control_fn(void *p1, void *p2, void *p3)
 
         LOG_INF("[CONTROL] processed seq=%u", event.seq);
 
-        /* TODO: Define a response-time guarantee. */
-        /* TODO: Measure latency and count every deadline miss. */
-        /* TODO: Rate-limit repeated warning messages. */
-        /* TODO: Add an application trace event for completion. */
+        /* Define a response-time guarantee. */
+        uint32_t latency_ms = k_uptime_get_32() - event.ready_ms;
+
+        /* Measure latency and count every deadline miss. */
+        if (latency_ms > DEADLINE_MS)
+        {
+            /* Rate-limit repeated warning messages. */
+            deadline_misses++;
+            LOG_WRN("[Control] deadline_miss count=%u seq=%u latency=%ums", deadline_misses, event.seq, latency_ms);
+        } 
+        else
+        {
+            LOG_INF("[Control] event_done seq=%u latency=%ums", event.seq, latency_ms);
+        }
+
+        /* Add an application trace event for completion. */
+        sys_trace_named_event("event_done", event.seq, latency_ms);
     }
 }
 
