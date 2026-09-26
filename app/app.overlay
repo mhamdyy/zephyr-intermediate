@@ -1,5 +1,5 @@
 / {
-	chosen {
-		zephyr,tracing-uart = &uart0;
-	};
+    chosen {
+        zephyr,tracing-uart = &uart0;
+    };
 };
