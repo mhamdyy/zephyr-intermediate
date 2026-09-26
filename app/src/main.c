@@ -77,11 +77,11 @@ static void control_fn(void *p1, void *p2, void *p3)
         {
             /* Rate-limit repeated warning messages. */
             deadline_misses++;
-            LOG_WRN("[Control] deadline_miss count=%u seq=%u latency=%ums", deadline_misses, event.seq, latency_ms);
+            LOG_WRN("[CONTROL] deadline_miss count=%u seq=%u latency=%ums", deadline_misses, event.seq, latency_ms);
         } 
         else
         {
-            LOG_INF("[Control] event_done seq=%u latency=%ums", event.seq, latency_ms);
+            LOG_INF("[CONTROL] event_done seq=%u latency=%ums", event.seq, latency_ms);
         }
 
         /* Add an application trace event for completion. */
