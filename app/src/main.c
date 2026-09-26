@@ -9,6 +9,7 @@ LOG_MODULE_REGISTER(homework, LOG_LEVEL_INF);
 #define MAINTENANCE_PRIORITY     4
 #define EVENT_PERIOD_MS        250
 #define MAINTENANCE_LOAD_US  45000
+#define DEADLINE_MS             10
 
 struct control_event {
     uint32_t seq;
