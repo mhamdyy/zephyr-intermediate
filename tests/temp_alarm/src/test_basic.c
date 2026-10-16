@@ -83,6 +83,14 @@ ZTEST(temp_alarm_check, test_below_threshold)
 
     zassert_equal(fake_sensor_sample_fetch_fake.call_count, 1, "sensor sample fetch must be called once, got %u", fake_sensor_sample_fetch_fake.call_count);
 
+    zassert_equal(fake_sensor_sample_fetch_fake.arg1_val, SENSOR_CHAN_AMBIENT_TEMP, "sensor sample fetch must be called with SENSOR_CHAN_AMBIENT_TEMP, got %d",
+         fake_sensor_sample_fetch_fake.arg1_val);
+
+    zassert_equal(fake_sensor_channel_get_fake.call_count, 1, "sensor channel get must be called once, got %u", fake_sensor_channel_get_fake.call_count);
+
+    zassert_equal(fake_sensor_channel_get_fake.arg1_val, SENSOR_CHAN_AMBIENT_TEMP, "sensor channel get must be called with SENSOR_CHAN_AMBIENT_TEMP, got %d", 
+        fake_sensor_channel_get_fake.arg1_val);
+
     zassert_ok(temp_alarm_get_status(&status), "get_status must succeed");
 
     zassert_equal(status.last_temp, 20, "last_temp must be 20 C after reading, got %d", status.last_temp);
@@ -93,18 +101,64 @@ ZTEST(temp_alarm_check, test_below_threshold)
 
 ZTEST(temp_alarm_check, test_at_threshold)
 {
-    /* TODO(l8-task1): a reading equal to the threshold (30 C) is not an alarm.
-     * See TEST_SPEC.md "Suite temp_alarm_check" #2.
-     */
-    ztest_test_skip();
+    struct temp_alarm_status status;
+
+    /*Simulate a successful sensor fetch channel*/
+    fake_sensor_sample_fetch_fake.return_val = 0;
+
+    /*Simulate a temperature reading at the threshold (30 C)*/
+    sensor_fake_set_temperature(30);
+
+    zassert_ok(temp_alarm_check(), "temp_alarm_check must succeed");
+
+    zassert_equal(fake_sensor_sample_fetch_fake.call_count, 1, "sensor sample fetch must be called once, got %u", fake_sensor_sample_fetch_fake.call_count);
+
+    zassert_equal(fake_sensor_sample_fetch_fake.arg1_val, SENSOR_CHAN_AMBIENT_TEMP, "sensor sample fetch must be called with SENSOR_CHAN_AMBIENT_TEMP, got %d",
+         fake_sensor_sample_fetch_fake.arg1_val);
+
+    zassert_equal(fake_sensor_channel_get_fake.call_count, 1, "sensor channel get must be called once, got %u", fake_sensor_channel_get_fake.call_count);
+
+    zassert_equal(fake_sensor_channel_get_fake.arg1_val, SENSOR_CHAN_AMBIENT_TEMP, "sensor channel get must be called with SENSOR_CHAN_AMBIENT_TEMP, got %d", 
+        fake_sensor_channel_get_fake.arg1_val);
+
+    zassert_ok(temp_alarm_get_status(&status), "get_status must succeed");
+
+    zassert_equal(status.last_temp, 30, "last_temp must be 30 C after reading, got %d", status.last_temp);
+
+    zassert_false(status.is_alarming, "is_alarming must be false after reading at threshold");
+
+    zassert_equal(status.alarm_count, 0, "alarm_count must be 0 after reading at threshold, got %u", status.alarm_count);
 }
 
 ZTEST(temp_alarm_check, test_above_threshold)
 {
-    /* TODO(l8-task1): a reading of 40 C raises the alarm and counts it.
-     * See TEST_SPEC.md "Suite temp_alarm_check" #3.
-     */
-    ztest_test_skip();
+    struct temp_alarm_status status;
+
+    /*Simulate a successful sensor fetch channel*/
+    fake_sensor_sample_fetch_fake.return_val = 0;
+
+    /*Simulate a temperature reading above the threshold (40 C)*/
+    sensor_fake_set_temperature(40);
+
+    zassert_ok(temp_alarm_check(), "temp_alarm_check must succeed");
+
+    zassert_equal(fake_sensor_sample_fetch_fake.call_count, 1, "sensor sample fetch must be called once, got %u", fake_sensor_sample_fetch_fake.call_count);
+
+    zassert_equal(fake_sensor_sample_fetch_fake.arg1_val, SENSOR_CHAN_AMBIENT_TEMP, "sensor sample fetch must be called with SENSOR_CHAN_AMBIENT_TEMP, got %d",
+         fake_sensor_sample_fetch_fake.arg1_val);
+
+    zassert_equal(fake_sensor_channel_get_fake.call_count, 1, "sensor channel get must be called once, got %u", fake_sensor_channel_get_fake.call_count);
+
+    zassert_equal(fake_sensor_channel_get_fake.arg1_val, SENSOR_CHAN_AMBIENT_TEMP, "sensor channel get must be called with SENSOR_CHAN_AMBIENT_TEMP, got %d", 
+        fake_sensor_channel_get_fake.arg1_val);
+
+    zassert_ok(temp_alarm_get_status(&status), "get_status must succeed");
+
+    zassert_equal(status.last_temp, 40, "last_temp must be 40 C after reading, got %d", status.last_temp);
+
+    zassert_true(status.is_alarming, "is_alarming must be true after reading above threshold");
+
+    zassert_equal(status.alarm_count, 1, "alarm_count must be 1 after reading above threshold, got %u", status.alarm_count);
 }
 
 /*
