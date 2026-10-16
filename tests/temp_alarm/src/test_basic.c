@@ -203,9 +203,11 @@ ZTEST(temp_alarm_threshold, test_new_threshold_clears_alarm)
     /* Change the threshold to 50 C, which is above the last reading of 40 C */
     zassert_ok(temp_alarm_set_threshold(50), "temp_alarm_set_threshold must succeed");
 
+    zassert_ok(temp_alarm_get_status(&status), "get_status must succeed");
+
     zassert_false(status.is_alarming, "is_alarming must be false after reading above threshold");
 
-     zassert_ok(temp_alarm_check(), "temp_alarm_check must succeed");
+    zassert_ok(temp_alarm_check(), "temp_alarm_check must succeed");
 
     zassert_equal(fake_sensor_sample_fetch_fake.call_count, 2, "sensor sample fetch must be called once, got %u", fake_sensor_sample_fetch_fake.call_count);
 
