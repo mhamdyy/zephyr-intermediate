@@ -12,6 +12,7 @@
 #include <errno.h>
 #include <zephyr/fff.h>
 #include <zephyr/ztest.h>
+#include <sys/types.h>
 
 #include "sensor_fake.h"
 #include "temp_alarm.h"
@@ -139,7 +140,7 @@ ZTEST(temp_alarm_sensor_errors, test_fail_then_recover)
     /*Call Temperature Alarm Check */
     zassert_ok(temp_alarm_check(), "temp_alarm_check must succeed after recovery");
 
-    zassert_equal(fake_sensor_sample_fetch_fake.call_count, 1, "sensor sample fetch must be called once, got %u", fake_sensor_sample_fetch_fake.call_count);
+    zassert_equal(fake_sensor_sample_fetch_fake.call_count, 2, "sensor sample fetch must be called twice, got %u", fake_sensor_sample_fetch_fake.call_count);
 
     zassert_equal(fake_sensor_sample_fetch_fake.arg1_val, SENSOR_CHAN_AMBIENT_TEMP, "sensor sample fetch must be called with SENSOR_CHAN_AMBIENT_TEMP, got %d",
          fake_sensor_sample_fetch_fake.arg1_val);
