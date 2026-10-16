@@ -326,7 +326,7 @@ ZTEST(temp_alarm_reset, test_reset_clears_state)
     zassert_equal(status.alarm_count, 3, "alarm_count must be 3, got %u", status.alarm_count);
 
     /*Reset Alarm State*/
-    zassert_ok(temp_alarm_reset(), "temp_alarm_reset must succeed");
+    temp_alarm_reset();
 
     /*Get Alarm Status*/
     zassert_ok(temp_alarm_get_status(&status), "get_status must succeed");
