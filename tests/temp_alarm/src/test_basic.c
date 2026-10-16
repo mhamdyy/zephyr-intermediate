@@ -74,17 +74,14 @@ ZTEST(temp_alarm_check, test_below_threshold)
     struct temp_alarm_status status;
 
     /*Simulate a successful sensor fetch channel*/
-    fake_sensor_sample_fetch.return_val = 0;
+    fake_sensor_sample_fetch_fake.return_val = 0;
 
     /*Simulate a temperature reading below the threshold (20 C)*/
-    sim_temperature = 20;
-
-    /*Call the custom fake function for sensor channel get*/
-    fake_sensor_channel_get.custom_fake = custom_sensor_channel_get;
+    sensor_fake_set_temperature(20);
 
     zassert_ok(temp_alarm_check(), "temp_alarm_check must succeed");
 
-    zassert_equal(fake_sensor_sample_fetch.call_count, 1, "sensor sample fetch must be called once, got %u", fake_sensor_sample_fetch.call_count);
+    zassert_equal(fake_sensor_sample_fetch_fake.call_count, 1, "sensor sample fetch must be called once, got %u", fake_sensor_sample_fetch_fake.call_count);
 
     zassert_ok(temp_alarm_get_status(&status), "get_status must succeed");
 
