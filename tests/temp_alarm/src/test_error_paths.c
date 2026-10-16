@@ -171,33 +171,30 @@ ZTEST_SUITE(temp_alarm_invalid_input, NULL, NULL, before, NULL, NULL);
 
 ZTEST(temp_alarm_invalid_input, test_get_status_null)
 {
-    /* TODO(l8-task2): a NULL status pointer is rejected.
-     * See TEST_SPEC.md "Suite temp_alarm_invalid_input" #1.
-     */
-    ztest_test_skip();
+    /*Get Alarm Status*/
+    zassert_equal(temp_alarm_get_status(NULL), -EINVAL, "get_status must fail with -EINVAL");
 }
 
 ZTEST(temp_alarm_invalid_input, test_init_without_device)
 {
-    /* TODO(l8-task2): init without a sensor device is rejected.
-     * See TEST_SPEC.md "Suite temp_alarm_invalid_input" #2.
-     */
-    ztest_test_skip();
+    /*Init temp alarm*/
+    zassert_equal(temp_alarm_init(NULL, 30), -ENODEV, "init must fail with -ENODEV");
 }
 
 ZTEST(temp_alarm_invalid_input, test_init_threshold_out_of_range)
 {
-    /* TODO(l8-task2): init rejects thresholds outside the allowed range.
-     * See TEST_SPEC.md "Suite temp_alarm_invalid_input" #3.
-     */
-    ztest_test_skip();
+    /*Init temp alarm*/
+    zassert_equal(temp_alarm_init(&fake_sensor_dev, -1), -EINVAL, "init must fail with -EINVAL");
+
+    /*Init temp alarm*/
+    zassert_equal(temp_alarm_init(&fake_sensor_dev, 101), -EINVAL, "init must fail with -EINVAL");
 }
 
 ZTEST(temp_alarm_invalid_input, test_set_threshold_out_of_range)
 {
-    /* TODO(l8-task2): set_threshold rejects values outside the allowed range,
-     * and keeps the old threshold.
-     * See TEST_SPEC.md "Suite temp_alarm_invalid_input" #4.
-     */
-    ztest_test_skip();
+    /*Set the temp alarm threshold*/
+    zassert_equal(temp_alarm_set_threshold(-1), -EINVAL, "init must fail with -EINVAL");
+
+    /*Init temp alarm*/
+    zassert_equal(temp_alarm_set_threshold(101), -EINVAL, "init must fail with -EINVAL");
 }
