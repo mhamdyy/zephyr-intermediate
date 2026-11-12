@@ -4,7 +4,7 @@
 LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 
 #define STACK_SIZE (1024)
-#define PRIO (7)
+#define PRIO (17)
 #define INCREMENTS (1000000)
 
 static struct k_sem sem_finished;
@@ -24,13 +24,13 @@ void t_fn(void *p1, void *p2, void *p3)
         /*Shared variable protected with mutex*/
         k_mutex_lock(&mutex_for_shared_data, K_FOREVER);
         temp = counter;
-        k_yeild();
+        k_yield();
         counter = temp + 1;
         k_mutex_unlock(&mutex_for_shared_data);
 
         /*Unprotected shared variable*/
         temp = counter_no_mutex;
-        k_yeild();
+        k_yield();
         counter_no_mutex = temp + 1;
     }
 
