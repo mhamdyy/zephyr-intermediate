@@ -112,7 +112,7 @@ static void health_thread_fn(void *p1, void *p2, void *p3)
 
         LOG_DBG("[HEALTH] queue has %u free slots", PIPELINE_QUEUE_DEPTH - used);
 
-        if (used > 0.75 * PIPELINE_QUEUE_DEPTH)
+        if ((used * 4) >= (PIPELINE_QUEUE_DEPTH * 3))
         {
             LOG_WRN("[HEALTH] pipeline_queue is more than 75%% full");
         }
