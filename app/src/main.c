@@ -90,7 +90,7 @@ void logger_thread_fn(void *p1, void *p2, void *p3)
                 msg.temperature_mc,
                 k_uptime_get_32() - msg.timestamp_ms);
 
-        k_msleep(350);
+        k_msleep(90);
     }
 }
 
