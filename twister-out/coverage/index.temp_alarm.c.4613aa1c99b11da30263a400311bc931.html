@@ -75,14 +75,14 @@
   </div>
   <div class="Box-row Box-row--focus-gray py-2 d-flex">
     <div role="gridcell" class="color-fg-muted flex-auto min-width-0 col-md-2"><a href="#l64">temp_alarm_check (src/temp_alarm.c:64)</a>    </div>
-    <div role="gridcell" class="color-fg-muted flex-auto min-width-0 d-flex flex-justify-end flex-wrap flex-items-baseline" data-sort="120">called 120 times</div>
+    <div role="gridcell" class="color-fg-muted flex-auto min-width-0 d-flex flex-justify-end flex-wrap flex-items-baseline" data-sort="130">called 130 times</div>
     <div role="gridcell" class="color-fg-muted d-flex flex-justify-end flex-wrap col-2">100.0%</div>
     <div role="gridcell" class="color-fg-muted d-flex flex-justify-end flex-wrap col-2">100.0%</div>
     <div role="gridcell" class="color-fg-muted d-flex flex-justify-end flex-wrap col-2">80.0%</div>
   </div>
   <div class="Box-row Box-row--focus-gray py-2 d-flex">
     <div role="gridcell" class="color-fg-muted flex-auto min-width-0 col-md-2"><a href="#l107">temp_alarm_get_status (src/temp_alarm.c:107)</a>    </div>
-    <div role="gridcell" class="color-fg-muted flex-auto min-width-0 d-flex flex-justify-end flex-wrap flex-items-baseline" data-sort="160">called 160 times</div>
+    <div role="gridcell" class="color-fg-muted flex-auto min-width-0 d-flex flex-justify-end flex-wrap flex-items-baseline" data-sort="170">called 170 times</div>
     <div role="gridcell" class="color-fg-muted d-flex flex-justify-end flex-wrap col-2">100.0%</div>
     <div role="gridcell" class="color-fg-muted d-flex flex-justify-end flex-wrap col-2">100.0%</div>
     <div role="gridcell" class="color-fg-muted d-flex flex-justify-end flex-wrap col-2">100.0%</div>
@@ -606,7 +606,7 @@
         <td class="lineno"><a id="l64" href="#l64">64</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">120</td>
+        <td class="linecount coveredLine show_coveredLine">130</td>
         <td class="src  coveredLine show_coveredLine"><span class="kt">int</span><span class="w"> </span><span class="nf">temp_alarm_check</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span></td>
       </tr>
       <tr class="source-line">
@@ -641,7 +641,7 @@
         <td class="lineno"><a id="l69" href="#l69">69</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">120</td>
+        <td class="linecount coveredLine show_coveredLine">130</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_sample_fetch_chan</span><span class="p">(</span><span class="n">ctx_sensor_dev</span><span class="p">,</span><span class="w"> </span><span class="n">SENSOR_CHAN_AMBIENT_TEMP</span><span class="p">);</span></td>
       </tr>
       <tr class="source-line">
@@ -651,11 +651,11 @@
             <summary class="linebranchSummary">2/2</summary>
             <div class="linebranchContents">
               <div class="takenBranch">&check; Branch 3 &rightarrow; 4 taken 20 times.</div>
-              <div class="takenBranch">&check; Branch 3 &rightarrow; 11 taken 100 times.</div>
+              <div class="takenBranch">&check; Branch 3 &rightarrow; 11 taken 110 times.</div>
             </div>
           </details>
         </td>
-        <td class="linecount coveredLine show_coveredLine">120</td>
+        <td class="linecount coveredLine show_coveredLine">130</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
       </tr>
       <tr class="source-line">
@@ -697,7 +697,7 @@
         <td class="lineno"><a id="l76" href="#l76">76</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">100</td>
+        <td class="linecount coveredLine show_coveredLine">110</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sensor_channel_get</span><span class="p">(</span><span class="n">ctx_sensor_dev</span><span class="p">,</span><span class="w"> </span><span class="n">SENSOR_CHAN_AMBIENT_TEMP</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">val</span><span class="p">);</span></td>
       </tr>
       <tr class="source-line">
@@ -707,11 +707,11 @@
             <summary class="linebranchSummary">2/2</summary>
             <div class="linebranchContents">
               <div class="takenBranch">&check; Branch 12 &rightarrow; 13 taken 10 times.</div>
-              <div class="takenBranch">&check; Branch 12 &rightarrow; 20 taken 90 times.</div>
+              <div class="takenBranch">&check; Branch 12 &rightarrow; 20 taken 100 times.</div>
             </div>
           </details>
         </td>
-        <td class="linecount coveredLine show_coveredLine">100</td>
+        <td class="linecount coveredLine show_coveredLine">110</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
       </tr>
       <tr class="source-line">
@@ -753,7 +753,7 @@
         <td class="lineno"><a id="l83" href="#l83">83</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">90</td>
+        <td class="linecount coveredLine show_coveredLine">100</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">.</span><span class="n">val1</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
@@ -767,7 +767,7 @@
         <td class="lineno"><a id="l85" href="#l85">85</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">90</td>
+        <td class="linecount coveredLine show_coveredLine">100</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="n">ta_data</span><span class="p">.</span><span class="n">last_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
@@ -783,33 +783,33 @@
           <details class="linebranchDetails">
             <summary class="linebranchSummary">2/2</summary>
             <div class="linebranchContents">
-              <div class="takenBranch">&check; Branch 20 &rightarrow; 21 taken 50 times.</div>
+              <div class="takenBranch">&check; Branch 20 &rightarrow; 21 taken 60 times.</div>
               <div class="takenBranch">&check; Branch 20 &rightarrow; 28 taken 40 times.</div>
             </div>
           </details>
         </td>
-        <td class="linecount coveredLine show_coveredLine">90</td>
+        <td class="linecount coveredLine show_coveredLine">100</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">temp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ta_data</span><span class="p">.</span><span class="n">threshold</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
       </tr>
       <tr class="source-line">
         <td class="lineno"><a id="l88" href="#l88">88</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">50</td>
+        <td class="linecount coveredLine show_coveredLine">60</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">		</span><span class="n">ta_data</span><span class="p">.</span><span class="n">is_alarming</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
         <td class="lineno"><a id="l89" href="#l89">89</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">50</td>
+        <td class="linecount coveredLine show_coveredLine">60</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">		</span><span class="n">ta_data</span><span class="p">.</span><span class="n">alarm_count</span><span class="o">++</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
         <td class="lineno"><a id="l90" href="#l90">90</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">50</td>
+        <td class="linecount coveredLine show_coveredLine">60</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">		</span><span class="n">LOG_WRN</span><span class="p">(</span><span class="s">&quot;Alarm! temp=%d &gt; threshold=%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">ta_data</span><span class="p">.</span><span class="n">threshold</span><span class="p">);</span></td>
       </tr>
       <tr class="source-line">
@@ -844,7 +844,7 @@
         <td class="lineno"><a id="l95" href="#l95">95</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">90</td>
+        <td class="linecount coveredLine show_coveredLine">100</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
@@ -928,7 +928,7 @@
         <td class="lineno"><a id="l107" href="#l107">107</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">160</td>
+        <td class="linecount coveredLine show_coveredLine">170</td>
         <td class="src  coveredLine show_coveredLine"><span class="kt">int</span><span class="w"> </span><span class="nf">temp_alarm_get_status</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">temp_alarm_status</span><span class="w"> </span><span class="o">*</span><span class="n">status</span><span class="p">)</span></td>
       </tr>
       <tr class="source-line">
@@ -945,11 +945,11 @@
             <summary class="linebranchSummary">2/2</summary>
             <div class="linebranchContents">
               <div class="takenBranch">&check; Branch 2 &rightarrow; 3 taken 10 times.</div>
-              <div class="takenBranch">&check; Branch 2 &rightarrow; 4 taken 150 times.</div>
+              <div class="takenBranch">&check; Branch 2 &rightarrow; 4 taken 160 times.</div>
             </div>
           </details>
         </td>
-        <td class="linecount coveredLine show_coveredLine">160</td>
+        <td class="linecount coveredLine show_coveredLine">170</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></td>
       </tr>
       <tr class="source-line">
@@ -977,28 +977,28 @@
         <td class="lineno"><a id="l113" href="#l113">113</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">150</td>
+        <td class="linecount coveredLine show_coveredLine">160</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="n">status</span><span class="o">-&gt;</span><span class="n">last_temp</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">ta_data</span><span class="p">.</span><span class="n">last_temp</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
         <td class="lineno"><a id="l114" href="#l114">114</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">150</td>
+        <td class="linecount coveredLine show_coveredLine">160</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="n">status</span><span class="o">-&gt;</span><span class="n">alarm_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ta_data</span><span class="p">.</span><span class="n">alarm_count</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
         <td class="lineno"><a id="l115" href="#l115">115</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">150</td>
+        <td class="linecount coveredLine show_coveredLine">160</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="n">status</span><span class="o">-&gt;</span><span class="n">is_alarming</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ta_data</span><span class="p">.</span><span class="n">is_alarming</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
         <td class="lineno"><a id="l116" href="#l116">116</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">150</td>
+        <td class="linecount coveredLine show_coveredLine">160</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="n">status</span><span class="o">-&gt;</span><span class="n">last_error</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ta_data</span><span class="p">.</span><span class="n">last_error</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
@@ -1012,7 +1012,7 @@
         <td class="lineno"><a id="l118" href="#l118">118</a></td>
         <td class="linebranch">
         </td>
-        <td class="linecount coveredLine show_coveredLine">150</td>
+        <td class="linecount coveredLine show_coveredLine">160</td>
         <td class="src  coveredLine show_coveredLine"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></td>
       </tr>
       <tr class="source-line">
@@ -1036,7 +1036,7 @@
         <hr class="block-separator"/>
         <footer class="text-center">
           Created using <a href="http://gcovr.com/en/8.6">GCOVR (Version 8.6)</a>
-          at 2026-10-16 22:32:52
+          at 2026-11-13 02:34:43
         </footer>
       </div>
     </div>

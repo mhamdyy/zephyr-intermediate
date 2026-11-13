@@ -192,6 +192,8 @@ ZTEST(temp_alarm_invalid_input, test_init_threshold_out_of_range)
 
 ZTEST(temp_alarm_invalid_input, test_set_threshold_out_of_range)
 {
+    struct temp_alarm_status status;
+
     /*Set the temp alarm threshold*/
     zassert_equal(temp_alarm_set_threshold(-1), -EINVAL, "init must fail with -EINVAL");
 

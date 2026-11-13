@@ -11,4 +11,4 @@ manifest:
           - hal_nxp
           - hal_stm32
           - hal_nordic
-
+        path-prefix: deps
