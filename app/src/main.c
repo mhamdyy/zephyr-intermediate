@@ -4,12 +4,12 @@
 LOG_MODULE_REGISTER(demo, LOG_LEVEL_DBG);
 
 #define STACK_SIZE (1024)
-#define PRIO (17)
+#define PRIO (7)
 #define INCREMENTS (1000000)
+#define MUTEX_PROTECTION_ENABLED
 
 static struct k_sem sem_finished;
 static volatile int counter = 0;
-static volatile int counter_no_mutex = 0;
 
 static K_MUTEX_DEFINE(mutex_for_shared_data);
 
@@ -21,17 +21,15 @@ void t_fn(void *p1, void *p2, void *p3)
 
     for (int i = 0; i < INCREMENTS; i++)
     {
-        /*Shared variable protected with mutex*/
+	#ifdef MUTEX_PROTECTION_ENABLED
         k_mutex_lock(&mutex_for_shared_data, K_FOREVER);
+        #endif
         temp = counter;
         k_yield();
         counter = temp + 1;
+        #ifdef MUTEX_PROTECTION_ENABLED
         k_mutex_unlock(&mutex_for_shared_data);
-
-        /*Unprotected shared variable*/
-        temp = counter_no_mutex;
-        k_yield();
-        counter_no_mutex = temp + 1;
+        #endif
     }
 
     LOG_INF("%s Finished", name);
@@ -56,9 +54,6 @@ int main(void)
     LOG_INF("Actual Counter final value: %u", counter);
     LOG_INF("Expected Counter final value: %u", 2*INCREMENTS);
 
-    LOG_INF("Actual Counter_no_mutex final value: %u", counter_no_mutex);
-    LOG_INF("Expected Counter_no_mutex final value: %u", 2*INCREMENTS);
-
     if (counter == INCREMENTS * 2)
     {
         LOG_WRN("Counter has no race this run");
@@ -68,13 +63,5 @@ int main(void)
         LOG_ERR("Counter Race condition confirmed: lost %d updates", (INCREMENTS * 2) - counter);
     }
 
-    if (counter_no_mutex == INCREMENTS * 2)
-    {
-        LOG_WRN("Counter_no_mutex No race this run");
-    }
-    else
-    {
-        LOG_ERR("Counter_no_mutex Race condition confirmed: lost %d updates", (INCREMENTS * 2) - counter_no_mutex);
-    }
     return 0;
 }
