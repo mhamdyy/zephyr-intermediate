@@ -5,12 +5,11 @@
 LOG_MODULE_REGISTER(homework, LOG_LEVEL_INF);
 
 #define STACK_SIZE            2048
-#define CONTROL_PRIORITY         4
-#define MAINTENANCE_PRIORITY     7
+#define CONTROL_PRIORITY         7
+#define MAINTENANCE_PRIORITY     4
 #define EVENT_PERIOD_MS        250
 #define MAINTENANCE_LOAD_US  45000
 #define DEADLINE_MS             10
-
 struct control_event {
     uint32_t seq;
     uint32_t ready_ms;
@@ -77,8 +76,8 @@ static void control_fn(void *p1, void *p2, void *p3)
         {
             /* Rate-limit repeated warning messages. */
             deadline_misses++;
-            LOG_WRN("[CONTROL] deadline_miss count=%u seq=%u latency=%ums", deadline_misses, event.seq, latency_ms);
-        } 
+            LOG_WRN_RATELIMIT("[CONTROL] deadline_miss count=%u seq=%u latency=%ums", deadline_misses, event.seq, latency_ms);
+        }
         else
         {
             LOG_INF("[CONTROL] event_done seq=%u latency=%ums", event.seq, latency_ms);
