@@ -1,0 +1,49 @@
+BEFORE FIX  (CONTROL_PRIORITY=7  MAINTENANCE_PRIORITY=4) ---
+Source: data_origin/channel0_0
+
+[             0 ns]  thread_switched_out        thread=maintenance
+[             0 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[             0 ns]  thread_switched_out        thread=logging
+[             0 ns]  thread_switched_in         thread=shell_uart
+[             0 ns]  thread_switched_in         thread=idle
+[    1000000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    1045000000 ns]  thread_switched_out        thread=maintenance
+[    1045000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    1045000000 ns]  thread_switched_in         thread=idle
+[    1250000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    1295000000 ns]  thread_switched_out        thread=maintenance
+[    1295000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    1295000000 ns]  thread_switched_in         thread=idle
+[    1500000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    1545000000 ns]  thread_switched_out        thread=maintenance
+[    1545000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    1545000000 ns]  thread_switched_in         thread=logging
+[    1795000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    2250000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    2295000000 ns]  thread_switched_out        thread=maintenance
+[    2295000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    2295000000 ns]  thread_switched_in         thread=idle
+[    2500000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    2545000000 ns]  thread_switched_out        thread=maintenance
+[    2545000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    2545000000 ns]  thread_switched_in         thread=idle
+[    2750000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    2795000000 ns]  thread_switched_out        thread=maintenance
+[    2795000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    2795000000 ns]  thread_switched_in         thread=logging
+[    3045000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    3500000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    3545000000 ns]  thread_switched_out        thread=maintenance
+[    3545000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    3545000000 ns]  thread_switched_in         thread=idle
+[    3750000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+[    3795000000 ns]  thread_switched_out        thread=maintenance
+[    3795000000 ns]  thread_switched_in         thread=control  <<< control FINALLY runs (45 ms late)
+[    3795000000 ns]  thread_switched_in         thread=idle
+[    4000000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance preempts control (prio 4 > 7)
+
+timer ISR fires at ts=365098112 ns  (event_ready, seq=51)
+maintenance switched_in immediately (prio 4 wins over control prio 7)
+maintenance busy-waits 45,000,000 ns  (MAINTENANCE_LOAD_US=45000)
+control switched_in at ts=410098112 ns  =>  start_latency = 45 ms
+DEADLINE = 10 ms  =>  MISSED by 35 ms

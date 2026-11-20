@@ -1,0 +1,19 @@
+AFTER  FIX  (CONTROL_PRIORITY=4  MAINTENANCE_PRIORITY=7) ---
+Source: data/channel0_0  (commit 0cb145e)
+
+[             0 ns]  thread_switched_out        thread=maintenance
+[    1045000000 ns]  thread_switched_in         thread=idle
+[    1500000000 ns]  named_event                name=event_ready       arg0=4  arg1=0  <<< timer ISR posted event
+[    1500000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance now runs AFTER control
+[    1749990847 ns]  named_event                name=event_done        arg0=5  arg1=0  <<< control finished, latency=arg1 ms
+[    2000010687 ns]  thread_switched_in         thread=maintenance  <<< maintenance now runs AFTER control
+[    2042478575 ns]  thread_switched_in         thread=idle
+[    3183472573 ns]  thread_switched_in         thread=idle
+[    3000000000 ns]  named_event                name=event_ready       arg0=2573  arg1=0  <<< timer ISR posted event
+[    3000000000 ns]  thread_switched_in         thread=maintenance  <<< maintenance now runs AFTER control
+[    3183472511 ns]  thread_switched_out        thread=maintenance
+[    3183472573 ns]  thread_switched_in         thread=maintenance  <<< maintenance now runs AFTER control
+
+timer ISR fires at ts=1500000000 ns  (event_ready, seq=4)
+control switched_in immediately (prio 4 wins over maintenance prio 7)
+event_done: seq=5  latency_ms=0  =>  DEADLINE MET
