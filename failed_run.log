@@ -1,0 +1,64 @@
+-- west flash: rebuilding
+[1/2] Building native simulator runner, and linking final executable
+[2/2] Running utility command for native_runner_executable
+-- west flash: using runner native
+uart connected to pseudotty: /dev/pts/1
+*** Booting Zephyr OS build v4.4.0 ***
+[00:00:00.000,000] [0m<inf> homework: === L6 Homework: Runtime Investigation ===[0m
+[00:00:00.000,000] [0m<inf> homework: Control work must start within 10 ms[0m
+[00:00:00.000,000] [0m<inf> homework: Inspect, measure, trace, explain, and correct the delay[0m
+[00:00:00.545,000] [0m<inf> homework: [CONTROL] processed seq=0[0m
+[00:00:00.795,000] [0m<inf> homework: [CONTROL] processed seq=1[0m
+[00:00:01.045,000] [0m<inf> homework: [CONTROL] processed seq=2[0m
+[00:00:01.045,000] [1;33m<wrn> homework: Skipped 2 messages[0m
+[00:00:01.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=3 seq=2 latency=40ms[0m
+[00:00:01.295,000] [0m<inf> homework: [CONTROL] processed seq=3[0m
+[00:00:01.545,000] [0m<inf> homework: [CONTROL] processed seq=4[0m
+[00:00:01.795,000] [0m<inf> homework: [CONTROL] processed seq=5[0m
+[00:00:02.045,000] [0m<inf> homework: [CONTROL] processed seq=6[0m
+[00:00:02.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:02.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=7 seq=6 latency=40ms[0m
+[00:00:02.295,000] [0m<inf> homework: [CONTROL] processed seq=7[0m
+[00:00:02.545,000] [0m<inf> homework: [CONTROL] processed seq=8[0m
+[00:00:02.795,000] [0m<inf> homework: [CONTROL] processed seq=9[0m
+[00:00:03.045,000] [0m<inf> homework: [CONTROL] processed seq=10[0m
+[00:00:03.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:03.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=11 seq=10 latency=40ms[0m
+[00:00:03.295,000] [0m<inf> homework: [CONTROL] processed seq=11[0m
+[00:00:03.545,000] [0m<inf> homework: [CONTROL] processed seq=12[0m
+[00:00:03.795,000] [0m<inf> homework: [CONTROL] processed seq=13[0m
+[00:00:04.045,000] [0m<inf> homework: [CONTROL] processed seq=14[0m
+[00:00:04.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:04.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=15 seq=14 latency=40ms[0m
+[00:00:04.295,000] [0m<inf> homework: [CONTROL] processed seq=15[0m
+[00:00:04.545,000] [0m<inf> homework: [CONTROL] processed seq=16[0m
+[00:00:04.795,000] [0m<inf> homework: [CONTROL] processed seq=17[0m
+[00:00:05.045,000] [0m<inf> homework: [CONTROL] processed seq=18[0m
+[00:00:05.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:05.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=19 seq=18 latency=40ms[0m
+[00:00:05.295,000] [0m<inf> homework: [CONTROL] processed seq=19[0m
+[00:00:05.545,000] [0m<inf> homework: [CONTROL] processed seq=20[0m
+[00:00:05.795,000] [0m<inf> homework: [CONTROL] processed seq=21[0m
+[00:00:06.045,000] [0m<inf> homework: [CONTROL] processed seq=22[0m
+[00:00:06.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:06.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=23 seq=22 latency=40ms[0m
+[00:00:06.295,000] [0m<inf> homework: [CONTROL] processed seq=23[0m
+[00:00:06.545,000] [0m<inf> homework: [CONTROL] processed seq=24[0m
+[00:00:06.795,000] [0m<inf> homework: [CONTROL] processed seq=25[0m
+[00:00:07.045,000] [0m<inf> homework: [CONTROL] processed seq=26[0m
+[00:00:07.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:07.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=27 seq=26 latency=40ms[0m
+[00:00:07.295,000] [0m<inf> homework: [CONTROL] processed seq=27[0m
+[00:00:07.545,000] [0m<inf> homework: [CONTROL] processed seq=28[0m
+[00:00:07.795,000] [0m<inf> homework: [CONTROL] processed seq=29[0m
+[00:00:08.045,000] [0m<inf> homework: [CONTROL] processed seq=30[0m
+[00:00:08.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:08.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=31 seq=30 latency=40ms[0m
+[00:00:08.295,000] [0m<inf> homework: [CONTROL] processed seq=31[0m
+[00:00:08.545,000] [0m<inf> homework: [CONTROL] processed seq=32[0m
+[00:00:08.795,000] [0m<inf> homework: [CONTROL] processed seq=33[0m
+[00:00:09.045,000] [0m<inf> homework: [CONTROL] processed seq=34[0m
+[00:00:09.045,000] [1;33m<wrn> homework: Skipped 3 messages[0m
+[00:00:09.045,000] [1;33m<wrn> homework: [CONTROL] deadline_miss count=35 seq=34 latency=40ms[0m
+
+Stopped at 9.310s

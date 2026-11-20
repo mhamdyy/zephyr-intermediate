@@ -1,0 +1,71 @@
+-- west flash: rebuilding
+[1/2] Building native simulator runner, and linking final executable
+[2/2] Running utility command for native_runner_executable
+-- west flash: using runner native
+uart connected to pseudotty: /dev/pts/1
+*** Booting Zephyr OS build v4.4.0 ***
+[00:00:00.000,000] [0m<inf> homework: === L6 Homework: Runtime Investigation ===[0m
+[00:00:00.000,000] [0m<inf> homework: Control work must start within 10 ms[0m
+[00:00:00.000,000] [0m<inf> homework: Inspect, measure, trace, explain, and correct the delay[0m
+[00:00:00.500,000] [0m<inf> homework: [CONTROL] processed seq=0[0m
+[00:00:00.500,000] [0m<inf> homework: [CONTROL] event_done seq=0 latency=0ms[0m
+[00:00:00.750,000] [0m<inf> homework: [CONTROL] processed seq=1[0m
+[00:00:00.750,000] [0m<inf> homework: [CONTROL] event_done seq=1 latency=0ms[0m
+[00:00:01.000,000] [0m<inf> homework: [CONTROL] processed seq=2[0m
+[00:00:01.000,000] [0m<inf> homework: [CONTROL] event_done seq=2 latency=0ms[0m
+[00:00:01.250,000] [0m<inf> homework: [CONTROL] processed seq=3[0m
+[00:00:01.250,000] [0m<inf> homework: [CONTROL] event_done seq=3 latency=0ms[0m
+[00:00:01.500,000] [0m<inf> homework: [CONTROL] processed seq=4[0m
+[00:00:01.500,000] [0m<inf> homework: [CONTROL] event_done seq=4 latency=0ms[0m
+[00:00:01.750,000] [0m<inf> homework: [CONTROL] processed seq=5[0m
+[00:00:01.750,000] [0m<inf> homework: [CONTROL] event_done seq=5 latency=0ms[0m
+[00:00:02.000,000] [0m<inf> homework: [CONTROL] processed seq=6[0m
+[00:00:02.000,000] [0m<inf> homework: [CONTROL] event_done seq=6 latency=0ms[0m
+[00:00:02.250,000] [0m<inf> homework: [CONTROL] processed seq=7[0m
+[00:00:02.250,000] [0m<inf> homework: [CONTROL] event_done seq=7 latency=0ms[0m
+[00:00:02.500,000] [0m<inf> homework: [CONTROL] processed seq=8[0m
+[00:00:02.500,000] [0m<inf> homework: [CONTROL] event_done seq=8 latency=0ms[0m
+[00:00:02.750,000] [0m<inf> homework: [CONTROL] processed seq=9[0m
+[00:00:02.750,000] [0m<inf> homework: [CONTROL] event_done seq=9 latency=0ms[0m
+[00:00:03.000,000] [0m<inf> homework: [CONTROL] processed seq=10[0m
+[00:00:03.000,000] [0m<inf> homework: [CONTROL] event_done seq=10 latency=0ms[0m
+[00:00:03.250,000] [0m<inf> homework: [CONTROL] processed seq=11[0m
+[00:00:03.250,000] [0m<inf> homework: [CONTROL] event_done seq=11 latency=0ms[0m
+[00:00:03.500,000] [0m<inf> homework: [CONTROL] processed seq=12[0m
+[00:00:03.500,000] [0m<inf> homework: [CONTROL] event_done seq=12 latency=0ms[0m
+[00:00:03.750,000] [0m<inf> homework: [CONTROL] processed seq=13[0m
+[00:00:03.750,000] [0m<inf> homework: [CONTROL] event_done seq=13 latency=0ms[0m
+[00:00:04.000,000] [0m<inf> homework: [CONTROL] processed seq=14[0m
+[00:00:04.000,000] [0m<inf> homework: [CONTROL] event_done seq=14 latency=0ms[0m
+[00:00:04.250,000] [0m<inf> homework: [CONTROL] processed seq=15[0m
+[00:00:04.250,000] [0m<inf> homework: [CONTROL] event_done seq=15 latency=0ms[0m
+[00:00:04.500,000] [0m<inf> homework: [CONTROL] processed seq=16[0m
+[00:00:04.500,000] [0m<inf> homework: [CONTROL] event_done seq=16 latency=0ms[0m
+[00:00:04.750,000] [0m<inf> homework: [CONTROL] processed seq=17[0m
+[00:00:04.750,000] [0m<inf> homework: [CONTROL] event_done seq=17 latency=0ms[0m
+[00:00:05.000,000] [0m<inf> homework: [CONTROL] processed seq=18[0m
+[00:00:05.000,000] [0m<inf> homework: [CONTROL] event_done seq=18 latency=0ms[0m
+[00:00:05.250,000] [0m<inf> homework: [CONTROL] processed seq=19[0m
+[00:00:05.250,000] [0m<inf> homework: [CONTROL] event_done seq=19 latency=0ms[0m
+[00:00:05.500,000] [0m<inf> homework: [CONTROL] processed seq=20[0m
+[00:00:05.500,000] [0m<inf> homework: [CONTROL] event_done seq=20 latency=0ms[0m
+[00:00:05.750,000] [0m<inf> homework: [CONTROL] processed seq=21[0m
+[00:00:05.750,000] [0m<inf> homework: [CONTROL] event_done seq=21 latency=0ms[0m
+[00:00:06.000,000] [0m<inf> homework: [CONTROL] processed seq=22[0m
+[00:00:06.000,000] [0m<inf> homework: [CONTROL] event_done seq=22 latency=0ms[0m
+[00:00:06.250,000] [0m<inf> homework: [CONTROL] processed seq=23[0m
+[00:00:06.250,000] [0m<inf> homework: [CONTROL] event_done seq=23 latency=0ms[0m
+[00:00:06.500,000] [0m<inf> homework: [CONTROL] processed seq=24[0m
+[00:00:06.500,000] [0m<inf> homework: [CONTROL] event_done seq=24 latency=0ms[0m
+[00:00:06.750,000] [0m<inf> homework: [CONTROL] processed seq=25[0m
+[00:00:06.750,000] [0m<inf> homework: [CONTROL] event_done seq=25 latency=0ms[0m
+[00:00:07.000,000] [0m<inf> homework: [CONTROL] processed seq=26[0m
+[00:00:07.000,000] [0m<inf> homework: [CONTROL] event_done seq=26 latency=0ms[0m
+[00:00:07.250,000] [0m<inf> homework: [CONTROL] processed seq=27[0m
+[00:00:07.250,000] [0m<inf> homework: [CONTROL] event_done seq=27 latency=0ms[0m
+[00:00:07.500,000] [0m<inf> homework: [CONTROL] processed seq=28[0m
+[00:00:07.500,000] [0m<inf> homework: [CONTROL] event_done seq=28 latency=0ms[0m
+[00:00:07.750,000] [0m<inf> homework: [CONTROL] processed seq=29[0m
+[00:00:07.750,000] [0m<inf> homework: [CONTROL] event_done seq=29 latency=0ms[0m
+
+Stopped at 8.800s
