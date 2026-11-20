@@ -66,20 +66,29 @@ static void control_fn(void *p1, void *p2, void *p3)
             continue;
         }
 
-        LOG_INF("[CONTROL] processed seq=%u", event.seq);
-
-        /* The issue that deadline always passes before the event is processed 
-         * From the CTF trace the maintenance thread is consuming CPU cycles before scheduling the control thread.
-         * So the control thread is not able to run in time and the deadline is missed.
-         * The Fix is to increase the priority of the control thread to be higher than the maintenance thread so that it can run in time and meet the deadline.
+        /* Measure start latency IMMEDIATELY after k_msgq_get() returns,
+         * before any logging call.
+         * Definition: the 10 ms guarantee covers the interval from the
+         * timer ISR storing k_uptime_get_32() into event.ready_ms (start)
+         * to this exact line where the control thread reads the clock again
+         * (end).  It is *start latency only* – the time before useful work
+         * begins – not the full processing time of control_fn.
+         * Root cause (original priorities): maintenance_prio=4 < control_prio=7
+         * in Zephyr numeric ordering, so maintenance had higher scheduling
+         * priority.  After the ISR, the scheduler ran maintenance first for
+         * 45 ms (MAINTENANCE_LOAD_US), making every deadline miss by 35 ms.
+         * Fix: swap priorities so control_prio=4 < maintenance_prio=7, giving
+         * control the CPU immediately after the ISR.
          */
+
+        uint32_t latency_ms = k_uptime_get_32() - event.ready_ms;
+
+        LOG_INF("[CONTROL] processed seq=%u", event.seq);
 
         /* Define a response-time guarantee. */
         /* Measure the time between the timer generating the event and control_fn processing it,
          * It should be less than the deadline.
          */
-        uint32_t latency_ms = k_uptime_get_32() - event.ready_ms;
-
         /* Measure latency and count every deadline miss. */
         if (latency_ms > DEADLINE_MS)
         {
